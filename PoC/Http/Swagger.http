@@ -1,0 +1,10 @@
+@host = https://localhost:7266
+
+### Swagger JSON
+GET {{host}}/swagger/v1/swagger.json
+Accept: application/json
+
+
+### Swagger UI
+GET {{host}}/swagger
+Accept: text/html

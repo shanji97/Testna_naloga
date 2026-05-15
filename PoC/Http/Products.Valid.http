@@ -1,0 +1,71 @@
+@host = https://localhost:7266
+
+### Get all products
+GET {{host}}/api/products
+Accept: application/json
+
+
+### Filter products by name
+GET {{host}}/api/products?name=lap
+Accept: application/json
+
+
+### Filter products by category id
+GET {{host}}/api/products?categoryId=1
+Accept: application/json
+
+
+### Filter products by minimum price
+GET {{host}}/api/products?minPrice=50
+Accept: application/json
+
+
+### Filter products by maximum price
+GET {{host}}/api/products?maxPrice=100
+Accept: application/json
+
+
+### Filter products by price range
+GET {{host}}/api/products?minPrice=10&maxPrice=100
+Accept: application/json
+
+
+### Filter products by name, category, and price range
+GET {{host}}/api/products?name=keyboard&categoryId=1&minPrice=10&maxPrice=100
+Accept: application/json
+
+
+### Update product name and price
+PATCH {{host}}/api/products/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Updated Laptop",
+  "price": 999.99
+}
+
+
+### Update product name only
+PATCH {{host}}/api/products/2
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Mechanical Keyboard"
+}
+
+
+### Update product price only
+PATCH {{host}}/api/products/3
+Content-Type: application/json
+Accept: application/json
+
+{
+  "price": 34.99
+}
+
+
+### Verify updated products
+GET {{host}}/api/products
+Accept: application/json

@@ -1,0 +1,76 @@
+@host = https://localhost:7266
+
+### Invalid filter: negative minimum price
+GET {{host}}/api/products?minPrice=-1
+Accept: application/json
+
+
+### Invalid filter: negative maximum price
+GET {{host}}/api/products?maxPrice=-1
+Accept: application/json
+
+
+### Invalid filter: minimum price greater than maximum price
+GET {{host}}/api/products?minPrice=100&maxPrice=10
+Accept: application/json
+
+
+### Invalid update: product does not exist
+PATCH {{host}}/api/products/999
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Non-existing product",
+  "price": 20
+}
+
+
+### Invalid update: empty request body
+PATCH {{host}}/api/products/1
+Content-Type: application/json
+Accept: application/json
+
+{
+}
+
+
+### Invalid update: empty product name
+PATCH {{host}}/api/products/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": ""
+}
+
+
+### Invalid update: whitespace product name
+PATCH {{host}}/api/products/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "   "
+}
+
+
+### Invalid update: negative price
+PATCH {{host}}/api/products/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "price": -5
+}
+
+
+### Invalid update: empty name and negative price
+PATCH {{host}}/api/products/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "",
+  "price": -5
+}
