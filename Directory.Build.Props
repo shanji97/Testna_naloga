@@ -1,0 +1,32 @@
+﻿<Project>
+	<!-- Shared configuration for .NET 9 projects in the repo -->
+	<PropertyGroup>
+		<!-- Targeting -->
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
+
+		<!-- Docker support -->
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+
+		<!-- Code quality -->
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<AnalysisLevel>latest</AnalysisLevel>
+
+		<!-- Assembly metadata -->
+		<Company>PoC - Endava tech interview</Company>
+		<Authors>Aleksander Kovach</Authors>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<IsAotCompatible>true</IsAotCompatible>
+		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+		<FileAlignment>512</FileAlignment>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+		<FileAlignment>512</FileAlignment>
+	</PropertyGroup>
+</Project>

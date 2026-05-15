@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/SolutionItems/">
+    <File Path="Directory.Build.Props" />
+    <File Path="Directory.Packages.Props" />
+  </Folder>
+  <Project Path="PoC.Core/PoC.Core.csproj" />
+  <Project Path="PoC.Tests/PoC.Tests.csproj" />
+  <Project Path="PoC/PoC.csproj" />
+</Solution>
