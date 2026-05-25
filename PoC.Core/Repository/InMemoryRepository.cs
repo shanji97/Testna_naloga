@@ -63,33 +63,48 @@ public sealed class InMemoryRepository : IProductRepository
 
     public IReadOnlyCollection<Product> GetFiltered(ProductFilter productFilter)
     {
-        IEnumerable<Product> query = _products;
-
-        if (!string.IsNullOrWhiteSpace(productFilter.Name))
+        lock (_lock)
         {
-            query = query.Where(product =>
-                product.Name.Contains(productFilter.Name, StringComparison.OrdinalIgnoreCase));
-        }
+            IEnumerable<Product> query = _products;
 
-        if (productFilter.CategoryId is not null)
-        {
-            query = query.Where(product => product.CategoryId == productFilter.CategoryId);
-        }
+            if (!string.IsNullOrWhiteSpace(productFilter.Name))
+            {
+                query = query.Where(product =>
+                    product.Name.Contains(productFilter.Name, StringComparison.OrdinalIgnoreCase));
+            }
 
-        if (productFilter.MinPrice is not null)
-        {
-            query = query.Where(product => product.Price >= productFilter.MinPrice);
-        }
+            if (productFilter.CategoryId is not null)
+            {
+                query = query.Where(product => product.CategoryId == productFilter.CategoryId);
+            }
 
-        if (productFilter.MaxPrice is not null)
-        {
-            query = query.Where(product => product.Price <= productFilter.MaxPrice);
-        }
+            //if (!string.IsNullOrWhiteSpace(productFilter.CategoryName))
+            //{
+            //    var matchingCategoryIds = _categories
+            //        .Where(category => category.Name.Contains(
+            //            productFilter.CategoryName,
+            //            StringComparison.OrdinalIgnoreCase))
+            //        .Select(category => category.Id)
+            //        .ToHashSet();
 
-        return query
-            .OrderBy(product => product.Id)
-            .ToList();
+            //    query = query.Where(product => matchingCategoryIds.Contains(product.CategoryId));
+            //}
+
+            if (productFilter.MinPrice is not null)
+            {
+                query = query.Where(product => product.Price >= productFilter.MinPrice);
+            }
+
+            if (productFilter.MaxPrice is not null)
+            {
+                query = query.Where(product => product.Price <= productFilter.MaxPrice);
+            }
+
+            return [.. query.OrderBy(product => product.Id)];
+        }
     }
+
+    //public bool CategoryExists(int categoryId) => _categories.Any(category => category.Id == categoryId);
 
     public Product? Update(int id, UpdateProductRequest request)
     {

@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
+	<PropertyGroup>
+	  <PublishAot>True</PublishAot>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Swashbuckle.AspNetCore" />
 	</ItemGroup>

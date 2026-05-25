@@ -6,6 +6,8 @@ public sealed class ProductFilter
 
     public int? CategoryId { get; init; }
 
+    //public string? CategoryName { get; init; }
+
     public decimal? MinPrice { get; init; }
 
     public decimal? MaxPrice { get; init; }
